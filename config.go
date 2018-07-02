@@ -27,6 +27,8 @@ func Get(key string) interface{} {
 		Construct()
 	}
 
+	fmt.Println(key)
+
 	return viper.Get(key)
 }
 

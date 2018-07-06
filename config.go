@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"gopkg.in/yaml.v2"
 	"fmt"
+	"errors"
 )
 
 var initStatus bool = false
@@ -83,7 +84,7 @@ func InitConfig(fileName string, configDefaults interface{}) bool  {
 	return true
 }
 
-func Get(key string) interface{} {
+func Get(key string) (interface{}, error) {
 	if !initStatus {
 		Construct()
 	}
@@ -91,10 +92,10 @@ func Get(key string) interface{} {
 	requestedConfig := viper.Get(key)
 
 	if requestedConfig == nil {
-		panic("Config key not setted: " + key)
+		return nil, errors.New("Config key not setted: " + key)
+	} else {
+		return requestedConfig, nil
 	}
-
-	return requestedConfig
 }
 
 

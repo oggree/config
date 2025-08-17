@@ -1,4 +1,4 @@
-module config
+module github.com/oggree/config
 
 go 1.24
 
